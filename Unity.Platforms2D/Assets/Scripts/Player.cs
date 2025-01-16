@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         if(feet is BoxCollider2D feetbox)
         {
             feetbox.gameObject.transform.position = FeetPosition;
-            feetbox.size = new Vector2(0.5f, maxFloorDistance);
+            feetbox.size = new Vector2(0.1f, maxFloorDistance);
         }
     }
 
@@ -96,14 +96,17 @@ public class Player : MonoBehaviour
         {
             rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
             anim.SetTrigger("Jump");
-            jumpsLeft--;
+             jumpsLeft--;
         }
     }
 
     private bool CanJump()
     {
         if (Physics2D.Raycast(FeetPosition, Vector2.down, maxFloorDistance, jumpableLayer))
-            jumpsLeft = maxJumps;
+        {
+            //jumpsLeft = maxJumps;
+            Debug.Log("Jumps reset!");
+        }
         return jumpsLeft > 0;
     }
 
